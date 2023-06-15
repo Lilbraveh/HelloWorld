@@ -1,0 +1,20 @@
+# Use an official Node.js runtime as the base image
+FROM node:16
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Copy package.json and package-lock.json into the current directory (/app) inside the container
+COPY package*.json ./
+
+# Install the application dependencies inside the container
+RUN npm install
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# The application listens on port 3000, so let Docker know about it
+EXPOSE 3000
+
+# Define the command that should be executed when the Docker container starts
+CMD ["node", "app.js"]
